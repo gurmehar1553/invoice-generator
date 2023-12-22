@@ -8,10 +8,7 @@ public class InvoiceGenerator {
 
     public double findTotalFare(double dis, int time) {
         double fare= dis*COST_PER_KILOMETER + time*COST_PER_MINUTE;
-        if(fare < MIN_FARE){
-            return MIN_FARE;
-        }
-        return fare;
+        return Math.max(fare, MIN_FARE);
     }
 
     public double findTotalFare(Ride[] rides) {
