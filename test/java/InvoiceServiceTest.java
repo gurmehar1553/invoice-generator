@@ -1,4 +1,5 @@
 import invoiceService.InvoiceGenerator;
+import invoiceService.InvoiceSummary;
 import invoiceService.Ride;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,9 +26,9 @@ public class InvoiceServiceTest {
         Assert.assertEquals(5,cost,0.0);
     }
     @Test
-    public void givenMultipleRides_ShouldReturnTotalFare(){
+    public void givenMultipleRides_ShouldReturnInvoiceSummary(){
         Ride[] rides={new Ride(20.0,10), new Ride(0.2,2)};
-        double fare = invoiceGenerator.findTotalFare(rides);
-        Assert.assertEquals(215,fare,0.0);
+        InvoiceSummary invoiceSummary = invoiceGenerator.findTotalFare(rides);
+        Assert.assertEquals(new InvoiceSummary(2,215,107.5),invoiceSummary);
     }
 }
