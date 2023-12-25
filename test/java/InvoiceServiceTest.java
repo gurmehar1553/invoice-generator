@@ -1,3 +1,4 @@
+import invoiceService.PremiumCarRide;
 import invoiceService.InvoiceGenerator;
 import invoiceService.InvoiceSummary;
 import invoiceService.Ride;
@@ -44,6 +45,16 @@ public class InvoiceServiceTest {
         invoiceGenerator.addRide(userId,rides);
         InvoiceSummary invoiceSummary = invoiceGenerator.findTotalFare(userId);
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2,215,107.5);
+        Assert.assertEquals(expectedInvoiceSummary,invoiceSummary);
+    }
+    @Test
+    public void givenMultipleRides_ShouldReturnFarePremium(){
+        Ride[] rides={
+                new Ride(20.0,10),
+                new Ride(2,2)
+        };
+        InvoiceSummary invoiceSummary = invoiceGenerator.findTotalFarePremiumRides(rides);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2,354,177);
         Assert.assertEquals(expectedInvoiceSummary,invoiceSummary);
     }
 }

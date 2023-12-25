@@ -33,4 +33,17 @@ public class InvoiceGenerator {
         Ride[] rides = rideRepository.get(userId);
         return this.findTotalFare(rides);
     }
+    public InvoiceSummary findTotalFarePremiumRides(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides){
+            totalFare += findTotalFarePremiumRides(ride);
+        }
+        double avgFare = totalFare/rides.length;
+        return new InvoiceSummary(rides.length,totalFare,avgFare);
+    }
+
+    private double findTotalFarePremiumRides(Ride ride) {
+        return Math.max(PremiumCarRide.MIN_FARE,
+                ride.dist * PremiumCarRide.COST_PER_KILOMETER + ride.time*PremiumCarRide.COST_PER_MINUTE);
+    }
 }

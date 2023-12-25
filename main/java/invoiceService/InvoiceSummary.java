@@ -15,7 +15,8 @@ public class InvoiceSummary {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InvoiceSummary that = (InvoiceSummary) o;
-        return numRides == that.numRides && Double.compare(totalFare, that.totalFare) == 0;
+        return numRides == that.numRides && Double.compare(totalFare, that.totalFare) == 0
+                && Double.compare(avgFare, that.avgFare) == 0;
     }
 
 }
